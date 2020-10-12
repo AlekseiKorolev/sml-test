@@ -1,0 +1,22 @@
+$body-bg: #fff;
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+.tooltip-inner {
+  font-family: "AvertaDemoPE-Regular";
+  max-width: 220px !important;
+  margin: 1em 0 0 0.6em;
+  padding: 15px 10px;
+  background-color: #5e6cab !important;
+  text-align: left;
+  border-radius: 0;
+}
+.arrow {
+  margin-left: 0.6em;
+  width: 1rem !important;
+  height: 1.7em !important;
+}
+.arrow:before {
+  border-width: 1em 0.7em 1.7em 0 !important;
+  border-bottom-color: #5e6cab !important;
+}

@@ -1,0 +1,26 @@
+.amount-container {
+  margin: 1em 0 0 2.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  input[type="text"] {
+    padding: 0 0 0.1em 1em;
+    max-width: 150px;
+    height: 30px;
+    font-family: "AvertaDemoPE-Regular";
+    font-weight: bold;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .currency-sign {
+    margin-left: 0.5em;
+    font-size: 1.1em;
+  }
+}
+.amount-container.hidden {
+  visibility: hidden;
+}

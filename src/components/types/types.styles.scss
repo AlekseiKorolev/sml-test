@@ -1,0 +1,61 @@
+.list-unstyled {
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+
+  li {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.2em;
+    label {
+      padding-left: 0.5em;
+      cursor: pointer;
+    }
+    input {
+      display: none;
+    }
+    .dot-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 15px;
+      height: 15px;
+      border: 1px solid black;
+      border-radius: 50%;
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        background-color: black;
+        border-radius: 50%;
+      }
+      .disabled {
+        visibility: hidden;
+      }
+    }
+
+    .tip-container {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 17px;
+      height: 17px;
+      border: 1px #909090 solid;
+      border-radius: 50%;
+      margin-left: 5px;
+
+      .tip {
+        font-size: 0.7em;
+        color: #909090;
+      }
+    }
+
+    .tip-container:hover {
+      border: 1px #000 solid;
+
+      .tip {
+        color: #000;
+      }
+    }
+  }
+}
