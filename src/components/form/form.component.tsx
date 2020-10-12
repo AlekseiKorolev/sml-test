@@ -36,7 +36,7 @@ const Form = (props: any) => {
         </form>
       </Row>
       {type === "month" && !valid && amount.length !== 0 ? (
-        <Info value={amount} type={type} />
+        <Info value={amount} type={type} tax={tax} />
       ) : (
         <div className="instead-of-info"></div>
       )}

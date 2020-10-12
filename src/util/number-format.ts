@@ -1,12 +1,21 @@
-export const numberFormat = (str: string, calc?: any) => {
+export const numberFormat = (str: string, calc?: string, tax?: boolean) => {
   let newFormat = str.split("").filter(num => num !== " ");
   if (calc) {
     const value = parseInt(newFormat.join(""));
-    const total = Math.round(value / 0.87);
-    if (calc === "tax") {
-      newFormat = (total - value).toString().split("");
+    if (tax) {
+      const total = Math.round(value / 0.87);
+      if (calc === "tax") {
+        newFormat = (total - value).toString().split("");
+      } else if (calc === "total") {
+        newFormat = total.toString().split("");
+      }
     } else {
-      newFormat = total.toString().split("");
+      const tax = Math.round(value * 0.13);
+      if (calc === "tax") {
+        newFormat = tax.toString().split("");
+      } else if (calc === "amount") {
+        newFormat = (value - tax).toString().split("");
+      }
     }
   }
   newFormat.reverse();
