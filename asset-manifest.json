@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/sml-test/static/css/main.c502b1c5.chunk.css",
+    "main.js": "/sml-test/static/js/main.1bc7a338.chunk.js",
+    "main.js.map": "/sml-test/static/js/main.1bc7a338.chunk.js.map",
+    "runtime-main.js": "/sml-test/static/js/runtime-main.b2f82d68.js",
+    "runtime-main.js.map": "/sml-test/static/js/runtime-main.b2f82d68.js.map",
+    "static/js/2.6b227121.chunk.js": "/sml-test/static/js/2.6b227121.chunk.js",
+    "static/js/2.6b227121.chunk.js.map": "/sml-test/static/js/2.6b227121.chunk.js.map",
+    "index.html": "/sml-test/index.html",
+    "precache-manifest.0fcbbd0a0bc2debd29f1dfd3f089ac15.js": "/sml-test/precache-manifest.0fcbbd0a0bc2debd29f1dfd3f089ac15.js",
+    "service-worker.js": "/sml-test/service-worker.js",
+    "static/css/main.c502b1c5.chunk.css.map": "/sml-test/static/css/main.c502b1c5.chunk.css.map",
+    "static/js/2.6b227121.chunk.js.LICENSE.txt": "/sml-test/static/js/2.6b227121.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/sml-test/static/media/AvertaDemoPE-Regular.a24a4f27.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b2f82d68.js",
+    "static/js/2.6b227121.chunk.js",
+    "static/css/main.c502b1c5.chunk.css",
+    "static/js/main.1bc7a338.chunk.js"
+  ]
+}
