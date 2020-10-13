@@ -37,10 +37,8 @@ const Amount = ({ type }: AmountType) => {
   };
 
   useEffect(() => {
-    const input = document.getElementById("amount") as HTMLInputElement;
-
-    input.addEventListener("input", (event: any) => {
-      const type = event.inputType.split("deleteContent").join("");
+    const handleFormatInput = (event: any) => {
+      const type = event.inputType?.split("deleteContent").join("") || "";
       let value = event.target.value;
       let caret = input.selectionStart || 0;
 
@@ -69,7 +67,12 @@ const Amount = ({ type }: AmountType) => {
 
       input.selectionStart = caret - diff + add >= 0 ? caret - diff + add : 0;
       input.selectionEnd = caret - diff + add >= 0 ? caret - diff + add : 0;
-    });
+    };
+
+    const input = document.getElementById("amount") as HTMLInputElement;
+    input.addEventListener("input", handleFormatInput);
+
+    return () => input.removeEventListener("input", handleFormatInput);
   }, [dispatch]);
 
   return (
