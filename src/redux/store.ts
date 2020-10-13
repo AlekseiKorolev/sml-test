@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-
 import { reducer as formReducer } from "redux-form";
 
 declare global {
@@ -10,8 +9,6 @@ declare global {
 }
 const composeEhnancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const initialState = {};
-
 const middleware = [thunk];
 
 const reducers = combineReducers({
@@ -20,7 +17,6 @@ const reducers = combineReducers({
 
 const store = createStore(
   reducers,
-  initialState,
   compose(applyMiddleware(...middleware), composeEhnancers())
 );
 

@@ -3,7 +3,7 @@ import React from "react";
 import "./form.styles.scss";
 
 import { reduxForm, InjectedFormProps } from "redux-form";
-import { useSelector } from "react-redux";
+import { useSelector, TypedUseSelectorHook } from "react-redux";
 
 import Types from "../types/types.component";
 import Tax from "../tax/tax.component";
@@ -12,20 +12,39 @@ import Info from "../info/info.component";
 
 import { Container, Row } from "react-bootstrap";
 
-interface FormProps {
+const initialState = {
+  amount: "",
+  tax: true,
+  type: "month"
+};
+
+interface Props {
   amount: string;
   tax: boolean;
   type: string;
 }
+interface Values {
+  values: Props;
+}
+interface Payment {
+  payment: Values;
+}
+interface Form {
+  form: Payment;
+}
 
-const Form: React.FC<InjectedFormProps<FormProps>> = (props: any) => {
-  const store: any = useSelector(state => state);
-  const amount = store?.form?.payment?.values?.amount || "";
-  const tax =
-    store?.form?.payment?.values?.tax !== undefined
-      ? store?.form?.payment?.values?.tax
-      : true;
-  const type = store?.form?.payment?.values?.type || "month";
+const useTypedSelector: TypedUseSelectorHook<Form> = useSelector;
+
+const Form: React.FC<InjectedFormProps<Props>> = () => {
+  const store = useTypedSelector(state =>
+    state?.form?.payment?.values !== undefined
+      ? { ...initialState, ...state.form.payment.values }
+      : initialState
+  );
+
+  const amount = store.amount;
+  const tax = store.tax;
+  const type = store.type;
 
   return (
     <Container>
@@ -46,6 +65,6 @@ const Form: React.FC<InjectedFormProps<FormProps>> = (props: any) => {
   );
 };
 
-export default reduxForm<FormProps>({
+export default reduxForm<Props>({
   form: "payment"
 })(Form);
