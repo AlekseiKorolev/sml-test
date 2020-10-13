@@ -6,7 +6,7 @@
 
   input[type="text"] {
     padding: 0 0 0.1em 1em;
-    max-width: 150px;
+    max-width: 160px;
     height: 30px;
     font-family: "AvertaDemoPE-Regular";
     font-weight: bold;
@@ -14,13 +14,15 @@
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-  }
+    border: 1px solid #ccc;
 
+    &:focus {
+      box-shadow: none;
+      border: 1px solid #ccc;
+    }
+  }
   .currency-sign {
     margin-left: 0.5em;
     font-size: 1.1em;
   }
-}
-.amount-container.hidden {
-  visibility: hidden;
 }

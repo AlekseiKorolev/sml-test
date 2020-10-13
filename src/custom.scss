@@ -2,6 +2,9 @@ $body-bg: #fff;
 
 @import "~bootstrap/scss/bootstrap.scss";
 
+.tooltip.show {
+  opacity: 1;
+}
 .tooltip-inner {
   font-family: "AvertaDemoPE-Regular";
   max-width: 220px !important;

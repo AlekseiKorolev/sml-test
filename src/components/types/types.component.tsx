@@ -4,7 +4,7 @@ import "./types.styles.scss";
 
 import { Field } from "redux-form";
 
-import { Overlay, Tooltip } from "react-bootstrap";
+import { Overlay, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 interface TypesConst {
   name: string;
@@ -33,46 +33,63 @@ const TYPES: TypesConst[] = [
 const INFO =
   "МРОТ - минимальный размер оплаты труда. Разный для разных регионов.";
 
-const renderType = (props: any) => {
-  const checked: string = props.checked;
-  const tip: boolean = props.tip;
+const renderTooltip = (props: any) => (
+  <Tooltip id="tip" {...props}>
+    {INFO}
+  </Tooltip>
+);
 
+interface RenderType {
+  checked: string;
+  tip: boolean;
+  input: any;
+  target: React.RefObject<HTMLDivElement>;
+  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+const renderType = ({
+  checked,
+  tip,
+  input,
+  target,
+  handleClick
+}: RenderType) => {
   return TYPES.map((type: TypesConst) => {
     return (
       <li key={`radio${type.id}`}>
-        <span className="dot-container">
-          <span className={type.id === checked ? "dot" : "disabled"}></span>
-        </span>
-        <input
-          className="form-chack-input"
-          id={type.id}
-          type="radio"
-          {...props.input}
-          value={type.id}
-          checked={checked === type.id}
-        />
         <label className="form-check-label" htmlFor={type.id}>
+          <span className="dot-container">
+            <span className={type.id === checked ? "dot" : "disabled"}></span>
+          </span>
+          <input
+            className="form-chack-input"
+            id={type.id}
+            type="radio"
+            {...input}
+            value={type.id}
+            checked={checked === type.id}
+          />
           {type.name}
         </label>
         {type.id === "min" ? (
-          <div
-            ref={props.target}
-            className="tip-container"
-            onClick={props.handleClick}
+          <OverlayTrigger
+            placement="bottom-start"
+            delay={{ show: 50, hide: 50 }}
+            overlay={renderTooltip}
           >
-            <span className="tip">{tip ? "x" : "i"}</span>
-          </div>
+            <div ref={target} className="tip-container" onClick={handleClick}>
+              <span className="tip">{tip ? "x" : "i"}</span>
+            </div>
+          </OverlayTrigger>
         ) : null}
       </li>
     );
   });
 };
 
-const Types = (props: any) => {
+const Types = ({ checked }: { checked: string }) => {
   const [tip, setTip] = useState<boolean>(false);
   const target = useRef(null);
-
-  const checked: string = props.checked;
 
   const handleClick = () => setTip(!tip);
 
@@ -87,11 +104,7 @@ const Types = (props: any) => {
         handleClick={handleClick}
       />
       <Overlay target={target.current} show={tip} placement="bottom-start">
-        {(props: any) => (
-          <Tooltip id="tip" {...props}>
-            {INFO}
-          </Tooltip>
-        )}
+        {renderTooltip}
       </Overlay>
     </ul>
   );

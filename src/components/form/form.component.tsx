@@ -2,8 +2,8 @@ import React from "react";
 
 import "./form.styles.scss";
 
-import { reduxForm } from "redux-form";
-import { connect } from "react-redux";
+import { reduxForm, InjectedFormProps } from "redux-form";
+import { useSelector } from "react-redux";
 
 import Types from "../types/types.component";
 import Tax from "../tax/tax.component";
@@ -12,18 +12,20 @@ import Info from "../info/info.component";
 
 import { Container, Row } from "react-bootstrap";
 
-const Form = (props: any) => {
-  const amount: string =
-    (props.state && props.state.values && props.state.values.amount) || "";
-  const tax: boolean =
-    props.state && props.state.values && props.state.values.tax !== undefined
-      ? props.state.values.tax
+interface FormProps {
+  amount: string;
+  tax: boolean;
+  type: string;
+}
+
+const Form: React.FC<InjectedFormProps<FormProps>> = (props: any) => {
+  const store: any = useSelector(state => state);
+  const amount = store?.form?.payment?.values?.amount || "";
+  const tax =
+    store?.form?.payment?.values?.tax !== undefined
+      ? store?.form?.payment?.values?.tax
       : true;
-  const type: string =
-    props.state && props.state.values && props.state.values.type
-      ? props.state.values.type
-      : "month";
-  const valid: boolean = props.valid;
+  const type = store?.form?.payment?.values?.type || "month";
 
   return (
     <Container>
@@ -31,12 +33,12 @@ const Form = (props: any) => {
       <Row>
         <form>
           <Types checked={type} />
-          <Tax tax={tax} />
-          <Amount type={type} />
+          {type !== "min" && <Tax tax={tax} />}
+          {type !== "min" && <Amount type={type} />}
         </form>
       </Row>
-      {type === "month" && !valid && amount.length !== 0 ? (
-        <Info value={amount} type={type} tax={tax} />
+      {type === "month" && amount.length !== 0 ? (
+        <Info value={amount} withTax={tax} />
       ) : (
         <div className="instead-of-info"></div>
       )}
@@ -44,12 +46,6 @@ const Form = (props: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  state: state.form.payment
-});
-
-const ConnectForm = connect(mapStateToProps)(Form);
-
-export default reduxForm({
+export default reduxForm<FormProps>({
   form: "payment"
-})(ConnectForm);
+})(Form);

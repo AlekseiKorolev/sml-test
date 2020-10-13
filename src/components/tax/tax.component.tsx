@@ -13,9 +13,7 @@ const renderSwitch = (props: any) => {
   );
 };
 
-const Tax = (props: any) => {
-  const tax: boolean = props.tax;
-
+const Tax = ({ tax }: { tax: boolean }) => {
   return (
     <div className="tax-container">
       <div className={tax ? "gray" : "black"}>Указать с НДФЛ</div>

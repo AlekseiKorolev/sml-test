@@ -2,29 +2,40 @@ import React from "react";
 
 import "./info.styles.scss";
 
-import { numberFormat } from "../../util/number-format";
+import calculate from "../../util/calculate";
+import numberValidator from "../../util/numberValidator";
 
 import { Row } from "react-bootstrap";
 
-const Info = (props: any) => {
-  const value: string = props.value;
-  const tax: boolean = props.tax;
+interface InfoProps {
+  value: string;
+  withTax: boolean;
+}
+
+interface InfoState {
+  amount: string;
+  tax: string;
+  total: string;
+}
+
+const Info = ({ value, withTax }: InfoProps) => {
+  const res: InfoState = calculate(numberValidator(value), withTax);
   return (
     <Row>
       <div className={"info-container"}>
         <div>
-          {numberFormat(value, "amount", tax)} &#8381;
+          {res.amount} &#8381;
           <span className="font-regular">
             {" "}
             сотрудник будет получать на руки
           </span>
         </div>
         <div>
-          {numberFormat(value, "tax", tax)} &#8381;
+          {res.tax} &#8381;
           <span className="font-regular"> НДФЛ, 13% от оклада</span>
         </div>
         <div>
-          {numberFormat(value, "total", tax)} &#8381;
+          {res.total} &#8381;
           <span className="font-regular"> за сотрудника в месяц</span>
         </div>
       </div>
